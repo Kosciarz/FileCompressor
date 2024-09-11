@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(FileCompresser)
+project(FileCompressor)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -8,9 +8,13 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
 set(SOURCES
-    src/main.cpp
-    src/compress.cpp
+        src/Main.cpp
+        src/Compressor.cpp
+        src/Decompressor.cpp
+        src/FileCompressor.cpp
+        src/Base.cpp
+        include/Base.h
 )
 
-add_executable(main ${SOURCES})
-
+add_executable(FileCompressor ${SOURCES})
+target_include_directories(FileCompressor PRIVATE ${CMAKE_SOURCE_DIR}/include)

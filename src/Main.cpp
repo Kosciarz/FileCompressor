@@ -1,13 +1,9 @@
 #include <iostream>
 
-#include "compress.h"
+#include "FileCompressor.h"
 
-
-int main(int argc, char* argv[])
-{
-    startProgram(argc, argv);
-    
-    return 0;
+int main(const int argc, char *argv[]) {
+    FileCompressor::StartProgram(argc, argv);
+    std::cout << "Program finished successfully." << std::endl;
+    std::cin.get();
 }
-
-
