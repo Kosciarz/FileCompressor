@@ -4,3 +4,4 @@ build/
 .vs/
 .idea/
 cmake-build-debug/
+file.txt
