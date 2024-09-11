@@ -1,7 +1,0 @@
-# ninja log v6
-7	624	7432896370111848	CMakeFiles/compresser.dir/main.cpp.obj	af100b01b07cbfd7
-1377	2227	7433533509444118	main.exe	8b94946a7bee1f74
-24	924	7432893125477663	CMakeFiles/compresser.dir/compress.cpp.obj	8b0dd967bac42910
-4	448	7433644375156500	build.ninja	3a021a9b9621fa69
-8	629	7433451972627974	CMakeFiles/main.dir/src/main.cpp.obj	378f36af7c7e3f9f
-8	1376	7433533495868831	CMakeFiles/main.dir/src/compress.cpp.obj	26ba42dda1393fdf
