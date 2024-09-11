@@ -2,18 +2,16 @@
 
 #include <vector>
 #include <string>
+#include <map>
 
 #include "ICompressor.h"
 
-
-class Decompressor final : public ICompressor {
+class FileDecompressor final : public ICompressor {
 private:
-    std::string m_fileName;
-    int m_dictSize = 256;
-    std::map<int, std::string> m_dict;
+    std::string m_file_path;
 
 public:
-    explicit Decompressor(std::string fileName);
+    explicit FileDecompressor(std::string file_name);
 
     void Process() override;
 

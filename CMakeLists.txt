@@ -9,11 +9,11 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 set(SOURCES
         src/Main.cpp
-        src/Compressor.cpp
-        src/Decompressor.cpp
         src/FileCompressor.cpp
-        src/Base.cpp
-        include/Base.h
+        src/FileDecompressor.cpp
+        src/CompressionManager.cpp
+        src/ICompressor.cpp
+        src/CompressionManagerFactory.cpp
 )
 
 add_executable(FileCompressor ${SOURCES})

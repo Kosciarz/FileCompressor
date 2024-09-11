@@ -6,14 +6,12 @@
 #include <vector>
 
 
-class Compressor final : public ICompressor {
+class FileCompressor final : public ICompressor {
 private:
-    std::string m_fileName;
-    int m_dictSize = 256;
-    std::map<std::string, int> m_dict;
+    std::string m_file_path;
 
 public:
-    explicit Compressor(std::string fileName);
+    explicit FileCompressor(std::string file_path);
 
     void Process() override;
 

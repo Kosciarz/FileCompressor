@@ -1,11 +1,9 @@
 #pragma once
 
-#include <map>
-#include <string>
 
+class ICompressor {
+public:
+    virtual void Process() = 0;
 
-class Base {
-protected:
-    int m_DictSize = 256;
-    std::map<std::string, int> m_Dict;
+    virtual ~ICompressor() = default;
 };

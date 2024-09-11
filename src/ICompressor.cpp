@@ -1,2 +1,2 @@
-#include "Base.h"
+#include "ICompressor.h"
 

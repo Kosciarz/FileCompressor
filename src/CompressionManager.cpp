@@ -1,36 +1,26 @@
-#include "FileCompressor.h"
-
-#include <Compressor.h>
-#include <Decompressor.h>
 #include <iostream>
 #include <memory>
+#include <algorithm>
 
-std::unique_ptr<Base> FileCompressorFactory(const std::string &operation, std::string &fileName);
+#include "ICompressor.h"
+#include "CompressionManager.h"
+#include "CompressionManagerFactory.h"
 
-CompressionManager::CompressionManager(std::unique_ptr<Base> base) : m_Base()
-
-void CompressionManager::StartProgram(const int argc, char *argv[]) {
-    if (argc < 3) {
-        std::cerr << "" << "\n";
-        exit(EXIT_FAILURE);
-    }
-    std::string operation = argv[1];
-    std::string fileName = argv[2];
-
-    auto base = FileCompressorFactory(operation, fileName);
-    CompressionManager file_compressor(std::move(base));
+CompressionManager::CompressionManager(std::unique_ptr<ICompressor> operation) : m_operation(std::move(operation)) {
 }
 
+void CompressionManager::StartProgram() {
+    std::string operation, file_path;
+    std::cout << "Chose operation: " << "\n";
+    std::cout << "\t(C)ompress file" << "\n";
+    std::cout << "\t(D)ecompress file" << "\n";
+    std::cin >> operation;
+    std::cout << "Path to file: " << "\n";
+    std::cin >> file_path;
 
-static std::unique_ptr<Base> FileCompressorFactory(
-    const std::string &operation,
-    const std::string &fileName) {
-    if (operation == "-c") {
-        return std::make_unique<Compressor>(fileName);
-    }
-    if (operation == "-d") {
-        return std::make_unique<Decompressor>(fileName);
-    }
-    std::cerr << "Invalid operation!" << "\n";
-    exit(EXIT_FAILURE);
+    std::ranges::transform(operation, operation.begin(), ::tolower);
+
+    auto base = CompressionManagerFactory::CreateCompressionManager(operation, file_path);
+    const auto manager = CompressionManager(std::move(base));
+    manager.m_operation->Process();
 }

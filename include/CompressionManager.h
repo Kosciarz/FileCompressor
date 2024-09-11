@@ -3,14 +3,14 @@
 
 #include <memory>
 
-#include "Base.h"
+#include "ICompressor.h"
 
 class CompressionManager {
 private:
-    std::unique_ptr<Base> m_Base;
+    std::unique_ptr<ICompressor> m_operation;
 
 public:
-    explicit CompressionManager(std::unique_ptr<Base> base);
+    explicit CompressionManager(std::unique_ptr<ICompressor> operation);
 
-    static void StartProgram(int argc, char *argv[]);
+    static void StartProgram();
 };

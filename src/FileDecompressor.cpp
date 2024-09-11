@@ -1,37 +1,54 @@
 #include <iostream>
 #include <fstream>
-#include <map>
 #include <vector>
 
-#include "Decompressor.h"
+#include "FileDecompressor.h"
 
-Decompressor::Decompressor(std::string fileName) : ICompressor(), m_fileName(std::move(fileName)) {
+FileDecompressor::FileDecompressor(std::string file_name) : ICompressor(), m_file_path(std::move(file_name)) {
 }
 
-void Decompressor::Process() {
+void FileDecompressor::Process() {
     const std::vector<int> codes = ReadCodesFromFile();
-    for (int i = 0; i < m_dictSize; i++) {
-        m_dict[i] = {static_cast<char>(i)};
+    std::map<int, std::string> dict;
+    int dict_size = 256;
+    for (int i = 0; i < dict_size; i++) {
+        dict[i] = {static_cast<char>(i)};
     }
-    std::string decompressedData, pes;
+    std::string decompressed_data, pes;
 
     for (const int &code: codes) {
-        if (m_dict.contains(code)) {
-            decompressedData += m_dict[code];
-            pes += m_dict[code][0];
-            m_dict[m_dictSize++] = pes;
+        if (dict.contains(code)) {
+            decompressed_data += dict[code];
+            pes += dict[code][0];
+            dict[dict_size++] = pes;
         } else {
-            const std::string v = pes + m_dict[code][0];
-            m_dict[m_dictSize++] = v;
-            decompressedData += v;
+            const std::string v = pes + dict[code][0];
+            dict[dict_size++] = v;
+            decompressed_data += v;
         }
     }
-    WriteDataToFile(decompressedData);
+    WriteDataToFile(decompressed_data);
 }
 
-void Decompressor::WriteDataToFile(const std::string &data) const {
+std::vector<int> FileDecompressor::ReadCodesFromFile() const {
     std::fstream file;
-    file.open(m_fileName, std::fstream::trunc | std::fstream::out);
+    file.open(m_file_path, std::fstream::in);
+    if (!file.is_open()) {
+        std::cerr << "Error opening the file!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    std::vector<int> codes;
+    std::string file_line;
+    while (std::getline(file, file_line)) {
+        codes.push_back(std::stoi(file_line));
+    }
+    file.close();
+    return codes;
+}
+
+void FileDecompressor::WriteDataToFile(const std::string &data) const {
+    std::fstream file;
+    file.open(m_file_path, std::fstream::trunc | std::fstream::out);
     if (!file.is_open()) {
         std::cerr << "Error opening the file!" << std::endl;
         exit(EXIT_FAILURE);
