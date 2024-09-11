@@ -1,3 +1,0 @@
-C:/dev/FileCompresser/build/CMakeFiles/main.dir
-C:/dev/FileCompresser/build/CMakeFiles/edit_cache.dir
-C:/dev/FileCompresser/build/CMakeFiles/rebuild_cache.dir
