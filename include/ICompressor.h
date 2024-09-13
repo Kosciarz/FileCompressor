@@ -1,7 +1,8 @@
 #pragma once
 
 
-class ICompressor {
+class ICompressor
+{
 public:
     virtual void Process() = 0;
 

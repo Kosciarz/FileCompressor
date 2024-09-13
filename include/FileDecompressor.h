@@ -6,17 +6,17 @@
 
 #include "ICompressor.h"
 
-class FileDecompressor final : public ICompressor {
-private:
-    std::string m_file_path;
-
+class FileDecompressor final : public ICompressor
+{
 public:
-    explicit FileDecompressor(std::string file_name);
+    explicit FileDecompressor(std::string filePath);
 
     void Process() override;
 
 private:
     [[nodiscard]] std::vector<int> ReadCodesFromFile() const;
 
-    void WriteDataToFile(const std::string &data) const;
+    void WriteDataToFile(const std::string& data) const;
+
+    std::string m_FilePath;
 };
