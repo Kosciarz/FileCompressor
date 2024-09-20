@@ -6,10 +6,7 @@
 
 #include "FileCompressor.h"
 
-FileCompressor::FileCompressor(std::string file_path)
-	:
-	ICompressor(),
-	file_path_(std::move(file_path))
+FileCompressor::FileCompressor(std::string file_path) : ICompressor(), file_path_(std::move(file_path))
 {
 }
 
@@ -20,7 +17,7 @@ void FileCompressor::Process()
 	int dict_size = 256;
 
 	for (int i = 0; i < dict_size; i++)
-		dict[{static_cast<char>(i)}] = i;
+		dict[std::to_string(i)] = i;
 
 	std::vector<int> codes;
 	std::string sequence;
@@ -51,7 +48,7 @@ std::string FileCompressor::ReadDataFromFile() const
 	if (!file.is_open())
 	{
 		std::cerr << "Error: could not open the file!" << "\n";
-		throw std::exception("Error: could not open the file!");
+		throw std::runtime_error("Error: could not open the file!");
 	}
 
 	std::string data, file_line;
@@ -70,7 +67,7 @@ void FileCompressor::WriteDataToFile(const std::vector<int>& codes) const
 	if (!file.is_open())
 	{
 		std::cerr << "Error: could not open the file!" << "\n";
-		throw std::exception("Error: could not open the file!");
+		throw std::runtime_error("Error: could not open the file!");
 	}
 
 	for (const auto& code : codes)
