@@ -13,5 +13,5 @@ public:
     static void StartProgram();
 
 private:
-    std::unique_ptr<ICompressor> m_Operation;
+    std::unique_ptr<ICompressor> operation_;
 };

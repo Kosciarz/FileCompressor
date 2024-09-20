@@ -5,6 +5,6 @@
 int main()
 {
     CompressionManager::StartProgram();
-    std::cout << "\nProgram finished successfully." << std::endl;
+    std::cout << "\nProgram finished successfully." << '\n';
     std::cin.get();
 }

@@ -8,5 +8,5 @@
 class CompressionManagerFactory {
 public:
     static std::unique_ptr<ICompressor> CreateCompressionManager(const std::string &operation,
-                                                                 const std::string &filePath);
+                                                                 const std::string &file_path);
 };

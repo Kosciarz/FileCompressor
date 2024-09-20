@@ -8,7 +8,7 @@
 class FileCompressor final : public ICompressor
 {
 public:
-    explicit FileCompressor(std::string filePath);
+    explicit FileCompressor(std::string file_path);
 
     void Process() override;
 
@@ -17,5 +17,5 @@ private:
 
     void WriteDataToFile(const std::vector<int>& codes) const;
 
-    std::string m_FilePath;
+    std::string file_path_;
 };

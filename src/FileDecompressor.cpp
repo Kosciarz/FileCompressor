@@ -4,7 +4,7 @@
 
 #include "FileDecompressor.h"
 
-FileDecompressor::FileDecompressor(std::string filePath) : ICompressor(), m_FilePath(std::move(filePath))
+FileDecompressor::FileDecompressor(std::string file_path) : ICompressor(), file_path_(std::move(file_path))
 {
 }
 
@@ -12,39 +12,39 @@ void FileDecompressor::Process()
 {
     const std::vector<int> codes = ReadCodesFromFile();
     std::map<int, std::string> dict;
-    int dictSize = 256;
-    for (int i = 0; i < dictSize; i++)
+    int dict_size = 256;
+    for (int i = 0; i < dict_size; i++)
     {
         dict[i] = {static_cast<char>(i)};
     }
-    std::string decompressedData, pes;
+    std::string decompressed_data, pes;
 
     for (const int& code : codes)
     {
         if (dict.contains(code))
         {
-            decompressedData += dict[code];
+            decompressed_data += dict[code];
             pes += dict[code][0];
-            dict[dictSize++] = pes;
+            dict[dict_size++] = pes;
         }
         else
         {
             const std::string v = pes + dict[code][0];
-            dict[dictSize++] = v;
-            decompressedData += v;
+            dict[dict_size++] = v;
+            decompressed_data += v;
         }
     }
-    WriteDataToFile(decompressedData);
+    WriteDataToFile(decompressed_data);
 }
 
 std::vector<int> FileDecompressor::ReadCodesFromFile() const
 {
     std::fstream file;
-    file.open(m_FilePath, std::fstream::in);
+    file.open(file_path_, std::fstream::in);
     if (!file.is_open())
     {
-        std::cerr << "Error opening the file!" << std::endl;
-        exit(EXIT_FAILURE);
+        std::cerr << "Error opening the file!" << '\n';
+		throw std::exception("Error opening the file!");
     }
     std::vector<int> codes;
     std::string file_line;
@@ -59,11 +59,11 @@ std::vector<int> FileDecompressor::ReadCodesFromFile() const
 void FileDecompressor::WriteDataToFile(const std::string& data) const
 {
     std::fstream file;
-    file.open(m_FilePath, std::fstream::trunc | std::fstream::out);
+    file.open(file_path_, std::fstream::trunc | std::fstream::out);
     if (!file.is_open())
     {
-        std::cerr << "Error opening the file!" << std::endl;
-        exit(EXIT_FAILURE);
+        std::cerr << "Error opening the file!" << '\n';
+		throw std::exception("Error opening the file!");
     }
     file << data;
     file.close();
