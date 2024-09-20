@@ -24,12 +24,11 @@ void FileCompressor::Process()
 
 	std::vector<int> codes;
 	std::string sequence;
+
 	for (const char& character : data)
 	{
 		if (const std::string chars_to_add = sequence + character; dict.contains(chars_to_add))
-		{
 			sequence = chars_to_add;
-		}
 		else
 		{
 			codes.push_back(dict[sequence]);
@@ -37,6 +36,7 @@ void FileCompressor::Process()
 			sequence = character;
 		}
 	}
+
 	if (!sequence.empty())
 		codes.push_back(dict[sequence]);
 
@@ -47,11 +47,13 @@ std::string FileCompressor::ReadDataFromFile() const
 {
 	std::fstream file;
 	file.open(file_path_, std::fstream::in);
+
 	if (!file.is_open())
 	{
 		std::cerr << "Error: could not open the file!" << "\n";
 		throw std::exception("Error: could not open the file!");
 	}
+
 	std::string data, file_line;
 
 	while (std::getline(file, file_line))
@@ -64,11 +66,13 @@ void FileCompressor::WriteDataToFile(const std::vector<int>& codes) const
 {
 	std::fstream file;
 	file.open(file_path_, std::fstream::out | std::fstream::trunc);
+
 	if (!file.is_open())
 	{
 		std::cerr << "Error: could not open the file!" << "\n";
 		throw std::exception("Error: could not open the file!");
 	}
+
 	for (const auto& code : codes)
 		file << code << "\n";
 

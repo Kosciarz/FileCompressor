@@ -4,17 +4,17 @@
 class ICompressor
 {
 public:
-	virtual void Process();
+	virtual void Process() = 0;
 
 	ICompressor() = default;
 
-	ICompressor(const ICompressor&) = delete;
+	ICompressor(const ICompressor&) = default;
 
-	ICompressor(ICompressor&&) = delete;
+	ICompressor(ICompressor&&) = default;
 
-	ICompressor& operator=(const ICompressor&) = delete;
+	ICompressor& operator=(const ICompressor&) = default;
 
-	ICompressor& operator=(ICompressor&&) = delete;
+	ICompressor& operator=(ICompressor&&) = default;
 
 	virtual ~ICompressor() = default;
 };
