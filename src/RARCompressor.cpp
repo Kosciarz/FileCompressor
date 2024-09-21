@@ -7,5 +7,5 @@ RARCompressor::RARCompressor(std::string file_path) : file_path_(std::move(file_
 
 void RARCompressor::Process()
 {
-    // RAR compression logic
+    //TODO RAR compression logic
 }
