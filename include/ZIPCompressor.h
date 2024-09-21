@@ -7,7 +7,7 @@
 
 class ZIPCompressor final : public ICompressor
 {
-private:
+public:
     explicit ZIPCompressor(std::string file_path);
 
     void Process() override;

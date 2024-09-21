@@ -5,7 +5,6 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
-include_directories(${CMAKE_SOURCE_DIR}/include)
 
 set(SOURCES
         src/Main.cpp
@@ -18,5 +17,5 @@ set(SOURCES
         src/RARCompressor.cpp
 )
 
-add_executable(FileCompressor ${SOURCES})
+add_executable(FileCompressor ${SOURCES} ${HEADER_FILES})
 target_include_directories(FileCompressor PRIVATE ${CMAKE_SOURCE_DIR}/include)
