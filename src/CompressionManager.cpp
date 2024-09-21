@@ -12,17 +12,17 @@ CompressionManager::CompressionManager(std::unique_ptr<ICompressor> operation) :
 
 void CompressionManager::StartProgram()
 {
-    std::string operation, filePath;
+    std::string operation, file_path;
     std::cout << "Chose operation: " << "\n";
     std::cout << "\t(C)ompress file" << "\n";
     std::cout << "\t(D)ecompress file" << "\n";
     std::cin >> operation;
     std::cout << "Path to file: " << "\n";
-    std::cin >> filePath;
+    std::cin >> file_path;
 
     std::ranges::transform(operation, operation.begin(), ::tolower);
 
-    auto base = CompressionManagerFactory::CreateCompressionManager(operation, filePath);
+    auto base = CompressionManagerFactory::CreateCompressionManager(operation, file_path);
     const auto manager = CompressionManager(std::move(base));
     manager.operation_->Process();
 }

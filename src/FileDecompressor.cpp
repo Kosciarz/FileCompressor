@@ -46,7 +46,7 @@ std::vector<int> FileDecompressor::ReadCodesFromFile() const
     if (!file.is_open())
     {
         std::cerr << "Error opening the file!" << '\n';
-		throw std::runtime_error("Error opening the file!");
+        throw std::runtime_error("Error opening the file!");
     }
 
     std::vector<int> codes;
@@ -67,7 +67,7 @@ void FileDecompressor::WriteDataToFile(const std::string& data) const
     if (!file.is_open())
     {
         std::cerr << "Error opening the file!" << '\n';
-		throw std::runtime_error("Error opening the file!");
+        throw std::runtime_error("Error opening the file!");
     }
 
     file << data;

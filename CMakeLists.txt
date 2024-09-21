@@ -14,6 +14,8 @@ set(SOURCES
         src/CompressionManager.cpp
         src/ICompressor.cpp
         src/CompressionManagerFactory.cpp
+        src/ZIPCompressor.cpp
+        src/RARCompressor.cpp
 )
 
 add_executable(FileCompressor ${SOURCES})
