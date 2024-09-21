@@ -1,12 +1,12 @@
-#include <iostream>
-#include <string>
-
 #include "CompressionManagerFactory.h"
 #include "ICompressor.h"
 #include "FileCompressor.h"
 #include "FileDecompressor.h"
 #include "RARCompressor.h"
 #include "ZIPCompressor.h"
+
+#include <iostream>
+#include <string>
 
 std::unique_ptr<ICompressor> CompressionManagerFactory::CreateCompressionManager(
     const std::string& operation,

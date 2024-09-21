@@ -1,8 +1,8 @@
 #pragma once
 
-#include <string>
-
 #include "ICompressor.h"
+
+#include <string>
 
 class RARCompressor final : public ICompressor
 {

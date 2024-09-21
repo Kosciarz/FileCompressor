@@ -1,9 +1,8 @@
 #pragma once
 
-#include <string>
-
 #include "ICompressor.h"
 
+#include <string>
 
 class ZIPCompressor final : public ICompressor
 {

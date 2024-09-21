@@ -1,10 +1,13 @@
+#include "FileDecompressor.h"
+
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <map>
 
-#include "FileDecompressor.h"
-
-FileDecompressor::FileDecompressor(std::string file_path) : ICompressor(), file_path_(std::move(file_path))
+FileDecompressor::FileDecompressor(std::string file_path) :
+    ICompressor(),
+    file_path_(std::move(file_path))
 {
 }
 

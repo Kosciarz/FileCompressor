@@ -1,6 +1,6 @@
-#include <iostream>
-
 #include "CompressionManager.h"
+
+#include <iostream>
 
 int main()
 {

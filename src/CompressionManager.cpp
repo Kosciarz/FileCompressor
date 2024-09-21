@@ -1,10 +1,10 @@
-#include <iostream>
-#include <memory>
-#include <algorithm>
-
 #include "ICompressor.h"
 #include "CompressionManager.h"
 #include "CompressionManagerFactory.h"
+
+#include <iostream>
+#include <memory>
+#include <algorithm>
 
 CompressionManager::CompressionManager(std::unique_ptr<ICompressor> operation) : operation_(std::move(operation))
 {

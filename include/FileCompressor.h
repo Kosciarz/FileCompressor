@@ -1,9 +1,9 @@
 #pragma once
 
 #include "ICompressor.h"
+
 #include <string>
 #include <vector>
-
 
 class FileCompressor final : public ICompressor
 {

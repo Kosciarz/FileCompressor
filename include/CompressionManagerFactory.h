@@ -1,12 +1,14 @@
 #pragma once
 
-#include <memory>
-
 #include "ICompressor.h"
 
+#include <memory>
 
-class CompressionManagerFactory {
+class CompressionManagerFactory
+{
 public:
-    static std::unique_ptr<ICompressor> CreateCompressionManager(const std::string &operation,
-                                                                 const std::string &file_path);
+    static std::unique_ptr<ICompressor> CreateCompressionManager(
+        const std::string& operation,
+        const std::string& file_path
+    );
 };
