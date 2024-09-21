@@ -10,7 +10,7 @@ class CompressionManager
 public:
     explicit CompressionManager(std::unique_ptr<ICompressor> operation);
 
-    static void StartProgram();
+    static void Run();
 
 private:
     std::unique_ptr<ICompressor> operation_;

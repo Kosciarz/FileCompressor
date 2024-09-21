@@ -10,14 +10,16 @@ CompressionManager::CompressionManager(std::unique_ptr<ICompressor> operation) :
 {
 }
 
-void CompressionManager::StartProgram()
+void CompressionManager::Run()
 {
-    std::string operation, file_path;
     std::cout << "Chose operation: " << "\n";
     std::cout << "\t(C)ompress file" << "\n";
     std::cout << "\t(D)ecompress file" << "\n";
+    std::string operation;
     std::cin >> operation;
+
     std::cout << "Path to file: " << "\n";
+    std::string file_path;
     std::cin >> file_path;
 
     std::ranges::transform(operation, operation.begin(), ::tolower);

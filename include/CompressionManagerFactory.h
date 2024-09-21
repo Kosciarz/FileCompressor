@@ -3,6 +3,7 @@
 #include "ICompressor.h"
 
 #include <memory>
+#include <string>
 
 class CompressionManagerFactory
 {
