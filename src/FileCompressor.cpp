@@ -6,9 +6,9 @@
 #include <vector>
 #include <string>
 
-FileCompressor::FileCompressor(std::string file_path) :
-    ICompressor(),
-    file_path_(std::move(file_path))
+FileCompressor::FileCompressor(std::string file_path)
+    : ICompressor(),
+      file_path_(std::move(file_path))
 {
 }
 

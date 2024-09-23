@@ -5,9 +5,9 @@
 #include <vector>
 #include <map>
 
-FileDecompressor::FileDecompressor(std::string file_path) :
-    ICompressor(),
-    file_path_(std::move(file_path))
+FileDecompressor::FileDecompressor(std::string file_path)
+    : ICompressor(),
+      file_path_(std::move(file_path))
 {
 }
 

@@ -1,6 +1,7 @@
 #include "RARCompressor.h"
 
-RARCompressor::RARCompressor(std::string file_path) : file_path_(std::move(file_path))
+RARCompressor::RARCompressor(std::string file_path)
+    : file_path_(std::move(file_path))
 {
 }
 

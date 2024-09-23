@@ -6,7 +6,8 @@
 #include <memory>
 #include <algorithm>
 
-CompressionManager::CompressionManager(std::unique_ptr<ICompressor> operation) : operation_(std::move(operation))
+CompressionManager::CompressionManager(std::unique_ptr<ICompressor> operation)
+    : operation_(std::move(operation))
 {
 }
 
@@ -27,4 +28,6 @@ void CompressionManager::Run()
     auto base = CompressionManagerFactory::CreateCompressionManager(operation, file_path);
     const auto manager = CompressionManager(std::move(base));
     manager.operation_->Process();
+
+    std::cin.get();
 }

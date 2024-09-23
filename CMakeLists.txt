@@ -9,16 +9,11 @@ if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif ()
 
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
-#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
-#set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
-
 set(SOURCES
         src/Main.cpp
         src/FileCompressor.cpp
         src/FileDecompressor.cpp
         src/CompressionManager.cpp
-        src/ICompressor.cpp
         src/CompressionManagerFactory.cpp
         src/ZIPCompressor.cpp
         src/RARCompressor.cpp
