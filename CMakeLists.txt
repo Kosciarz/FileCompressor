@@ -15,8 +15,6 @@ set(SOURCES
         src/FileDecompressor.cpp
         src/CompressionManager.cpp
         src/CompressionManagerFactory.cpp
-        src/ZIPCompressor.cpp
-        src/RARCompressor.cpp
 )
 
 
