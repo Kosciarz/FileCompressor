@@ -13,21 +13,34 @@ CompressionManager::CompressionManager(std::unique_ptr<ICompressor> operation)
 
 void CompressionManager::Run()
 {
-    std::cout << "Chose operation: " << "\n";
-    std::cout << "\t(C)ompress file" << "\n";
-    std::cout << "\t(D)ecompress file" << "\n";
-    std::string operation;
-    std::cin >> operation;
+    std::cout << "Welcome to File Compressor / Decompressor!\n";
+    int operation{};
 
-    std::cout << "Path to file: " << "\n";
-    std::string file_path;
-    std::cin >> file_path;
+    do
+    {
+        std::cout << "\nChose operation:\n";
+        std::cout << "1. Compress file\n";
+        std::cout << "2. Decompress file\n";
+        std::cout << "3. Exit\n";
+        std::cin >> operation;
 
-    std::ranges::transform(operation, operation.begin(), ::tolower);
+        if (std::cin.fail() || operation < 1 || operation > 3)
+        {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "\nEnter a valid operation! Please try again\n";
+            continue;
+        }
 
-    auto base = CompressionManagerFactory::CreateCompressionManager(operation, file_path);
-    const auto manager = CompressionManager(std::move(base));
-    manager.operation_->Process();
+        if (operation == 3)
+            return;
 
-    std::cin.get();
+        std::cout << "Path to file: " << "\n";
+        std::string file_path;
+        std::cin >> file_path;
+
+        auto base = CompressionManagerFactory::CreateCompressionManager(operation, file_path);
+        const auto manager = CompressionManager(std::move(base));
+        manager.operation_->Process();
+    } while (true);
 }

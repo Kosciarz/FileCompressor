@@ -7,27 +7,16 @@
 #include <iostream>
 #include <string>
 
-enum class Operation
-{
-    Compress = "c",
-    Decompress = "d",
-};
-
 std::unique_ptr<ICompressor> CompressionManagerFactory::CreateCompressionManager(
-    const std::string& operation,
+    const int operation,
     const std::string& file_path
 )
 {
-    switch (operation)
-    {
-    case Operation::Compress:
+    if (operation == 1)
         return std::make_unique<FileCompressor>(file_path);
-        break;
-    case Operation::Decompress:
+    if (operation == 2)
         return std::make_unique<FileDecompressor>(file_path);
-        break;
-    default:
-        std::cerr << "Invalid operation!" << "\n";
-        throw std::runtime_error("Invalid operation");
-    }
+        
+    std::cerr << "Invalid operation!" << "\n";
+    throw std::runtime_error("Invalid operation");
 }

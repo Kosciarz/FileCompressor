@@ -9,7 +9,7 @@ class CompressionManagerFactory
 {
 public:
     static std::unique_ptr<ICompressor> CreateCompressionManager(
-        const std::string& operation,
+        const int operation,
         const std::string& file_path
     );
 };
