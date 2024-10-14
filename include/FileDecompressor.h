@@ -17,5 +17,5 @@ private:
 
     void WriteDataToFile(const std::string& data) const;
 
-    std::string file_path_;
+    std::string m_file_path;
 };

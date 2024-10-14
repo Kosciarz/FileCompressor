@@ -7,7 +7,7 @@
 
 FileDecompressor::FileDecompressor(std::string file_path)
     : ICompressor(),
-      file_path_(std::move(file_path))
+      m_file_path(std::move(file_path))
 {
 }
 
@@ -32,9 +32,9 @@ void FileDecompressor::Process()
         }
         else
         {
-            const std::string v = pes + dict[code][0];
-            dict[dict_size++] = v;
-            decompressed_data += v;
+            const std::string value = pes + dict[code][0];
+            dict[dict_size++] = value;
+            decompressed_data += value;
         }
     }
 
@@ -44,7 +44,7 @@ void FileDecompressor::Process()
 std::vector<int> FileDecompressor::ReadCodesFromFile() const
 {
     std::fstream file;
-    file.open(file_path_, std::fstream::in);
+    file.open(m_file_path, std::fstream::in);
 
     if (!file.is_open())
     {
@@ -65,7 +65,7 @@ std::vector<int> FileDecompressor::ReadCodesFromFile() const
 void FileDecompressor::WriteDataToFile(const std::string& data) const
 {
     std::fstream file;
-    file.open(file_path_, std::fstream::trunc | std::fstream::out);
+    file.open(m_file_path, std::fstream::trunc | std::fstream::out);
 
     if (!file.is_open())
     {

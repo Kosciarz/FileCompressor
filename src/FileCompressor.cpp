@@ -9,7 +9,7 @@
 
 FileCompressor::FileCompressor(std::string file_path)
     : ICompressor(),
-      file_path_(std::move(file_path))
+      m_file_path(std::move(file_path))
 {
 }
 
@@ -20,7 +20,7 @@ void FileCompressor::Process()
     int dict_size = 256;
 
     for (int i = 0; i < dict_size; i++)
-        dict[std::to_string(i)] = i;
+        dict[{static_cast<char>(i)}] = i;
 
     std::vector<int> codes;
     std::string sequence;
@@ -46,7 +46,7 @@ void FileCompressor::Process()
 std::string FileCompressor::ReadDataFromFile() const
 {
     std::fstream file;
-    file.open(file_path_, std::fstream::in);
+    file.open(m_file_path, std::fstream::in);
 
     if (!file.is_open())
     {
@@ -65,7 +65,7 @@ std::string FileCompressor::ReadDataFromFile() const
 void FileCompressor::WriteDataToFile(const std::vector<int>& codes) const
 {
     std::fstream file;
-    file.open(file_path_, std::fstream::out | std::fstream::trunc);
+    file.open(m_file_path, std::fstream::out | std::fstream::trunc);
 
     if (!file.is_open())
     {

@@ -17,5 +17,5 @@ private:
 
     void WriteDataToFile(const std::vector<int>& codes) const;
 
-    std::string file_path_;
+    std::string m_file_path;
 };
