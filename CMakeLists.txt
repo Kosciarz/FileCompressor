@@ -13,14 +13,10 @@ set(SOURCES
         src/Main.cpp
         src/FileCompressor.cpp
         src/FileDecompressor.cpp
-        src/CompressionManager.cpp
-        src/CompressionManagerFactory.cpp
+        src/Compressor.cpp
 )
 
 
-foreach (SOURCE ${SOURCES})
-    message(STATUS "Source file: ${SOURCE}")
-endforeach ()
 
 add_executable(FileCompressor ${SOURCES} ${HEADER_FILES})
 target_include_directories(FileCompressor PRIVATE ${CMAKE_SOURCE_DIR}/include)

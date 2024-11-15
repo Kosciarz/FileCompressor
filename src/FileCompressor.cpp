@@ -7,19 +7,19 @@
 #include <vector>
 #include <string>
 
-FileCompressor::FileCompressor(std::string file_path)
+FileCompressor::FileCompressor(std::filesystem::path file_path)
     : ICompressor(),
-      m_file_path(std::move(file_path))
+      m_FilePath(std::move(file_path))
 {
 }
 
-void FileCompressor::Process()
+void FileCompressor::Run()
 {
     const std::string data = ReadDataFromFile();
     std::map<std::string, int> dict;
-    int dict_size = 256;
+    int dictSize = 256;
 
-    for (int i = 0; i < dict_size; i++)
+    for (int i = 0; i < dictSize; i++)
         dict[{static_cast<char>(i)}] = i;
 
     std::vector<int> codes;
@@ -27,12 +27,12 @@ void FileCompressor::Process()
 
     for (const char& character : data)
     {
-        if (const std::string chars_to_add = sequence + character; dict.contains(chars_to_add))
-            sequence = chars_to_add;
+        if (const std::string charsToAdd = sequence + character; dict.contains(charsToAdd))
+            sequence = charsToAdd;
         else
         {
             codes.push_back(dict[sequence]);
-            dict[chars_to_add] = dict_size++;
+            dict[charsToAdd] = dictSize++;
             sequence = character;
         }
     }
@@ -46,7 +46,7 @@ void FileCompressor::Process()
 std::string FileCompressor::ReadDataFromFile() const
 {
     std::fstream file;
-    file.open(m_file_path, std::fstream::in);
+    file.open(m_FilePath, std::fstream::in);
 
     if (!file.is_open())
     {
@@ -54,10 +54,11 @@ std::string FileCompressor::ReadDataFromFile() const
         throw std::runtime_error("Error: could not open the file!");
     }
 
-    std::string data, file_line;
+    std::string data;
+    std::string fileLine;
 
-    while (std::getline(file, file_line))
-        data += file_line + "\n";
+    while (std::getline(file, fileLine))
+        data += fileLine + "\n";
 
     return data;
 }
@@ -65,7 +66,7 @@ std::string FileCompressor::ReadDataFromFile() const
 void FileCompressor::WriteDataToFile(const std::vector<int>& codes) const
 {
     std::fstream file;
-    file.open(m_file_path, std::fstream::out | std::fstream::trunc);
+    file.open(m_FilePath, std::fstream::out | std::fstream::trunc);
 
     if (!file.is_open())
     {

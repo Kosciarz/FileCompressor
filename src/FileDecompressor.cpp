@@ -4,29 +4,31 @@
 #include <fstream>
 #include <vector>
 #include <map>
+#include <algorithm>
+#include <ranges>
 
-FileDecompressor::FileDecompressor(std::string file_path)
+FileDecompressor::FileDecompressor(std::filesystem::path filePath)
     : ICompressor(),
-      m_file_path(std::move(file_path))
+      m_FilePath(std::move(filePath))
 {
 }
 
-void FileDecompressor::Process()
+void FileDecompressor::Run()
 {
     const std::vector<int> codes = ReadCodesFromFile();
     std::map<int, std::string> dict;
     int dict_size = 256;
 
-    for (int i = 0; i < dict_size; i++)
-        dict[i] = std::to_string(i);
+    for (int i{}; i < dict_size; i++)
+        dict[i] = static_cast<char>(i);
 
-    std::string decompressed_data, pes;
+    std::string decompressedData, pes;
 
     for (const int& code : codes)
     {
         if (dict.contains(code))
         {
-            decompressed_data += dict[code];
+            decompressedData += dict[code];
             pes += dict[code][0];
             dict[dict_size++] = pes;
         }
@@ -34,17 +36,17 @@ void FileDecompressor::Process()
         {
             const std::string value = pes + dict[code][0];
             dict[dict_size++] = value;
-            decompressed_data += value;
+            decompressedData += value;
         }
     }
 
-    WriteDataToFile(decompressed_data);
+    WriteDataToFile(decompressedData);
 }
 
 std::vector<int> FileDecompressor::ReadCodesFromFile() const
 {
     std::fstream file;
-    file.open(m_file_path, std::fstream::in);
+    file.open(m_FilePath, std::fstream::in);
 
     if (!file.is_open())
     {
@@ -53,10 +55,10 @@ std::vector<int> FileDecompressor::ReadCodesFromFile() const
     }
 
     std::vector<int> codes;
-    std::string file_line;
+    std::string fileLine;
 
-    while (std::getline(file, file_line))
-        codes.push_back(std::stoi(file_line));
+    while (std::getline(file, fileLine))
+        codes.push_back(std::stoi(fileLine));
 
     file.close();
     return codes;
@@ -65,7 +67,7 @@ std::vector<int> FileDecompressor::ReadCodesFromFile() const
 void FileDecompressor::WriteDataToFile(const std::string& data) const
 {
     std::fstream file;
-    file.open(m_file_path, std::fstream::trunc | std::fstream::out);
+    file.open(m_FilePath, std::fstream::trunc | std::fstream::out);
 
     if (!file.is_open())
     {

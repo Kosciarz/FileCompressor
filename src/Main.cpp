@@ -1,6 +1,6 @@
-#include "CompressionManager.h"
+#include "Compressor.h"
 
 int main()
 {
-    CompressionManager::Run();
+  RunCompressor();
 }

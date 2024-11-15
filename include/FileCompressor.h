@@ -4,18 +4,19 @@
 
 #include <string>
 #include <vector>
+#include <filesystem>
 
 class FileCompressor final : public ICompressor
 {
 public:
-    explicit FileCompressor(std::string file_path);
+    FileCompressor(std::filesystem::path filePath);
 
-    void Process() override;
+    void Run() override;
 
 private:
     [[nodiscard]] std::string ReadDataFromFile() const;
 
     void WriteDataToFile(const std::vector<int>& codes) const;
 
-    std::string m_file_path;
+    std::filesystem::path m_FilePath;
 };
